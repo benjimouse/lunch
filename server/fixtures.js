@@ -1,16 +1,16 @@
-if (Posts.find().count() === 0) {
-    Posts.insert({
-        title: 'Start cooking the Turkey',
-        url: 'http://sachagreif.com/introducing-telescope/'
+if (Steps.find().count() === 0) {
+    Steps.insert({
+        description: 'Prepare turkey',
+        duration: 1800
     });
 
-    Posts.insert({
-        title: 'Put it in the oven',
-        url: 'http://meteor.com'
+    Steps.insert({
+        description: 'Warm oven',
+        duration: 600
     });
 
-    Posts.insert({
-        title: 'Take it out',
-        url: 'http://themeteorbook.com'
+    Steps.insert({
+        description: 'Turkey in oven at 200C',
+        duration: 9900
     });
 }
