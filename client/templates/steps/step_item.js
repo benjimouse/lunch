@@ -1,9 +1,10 @@
 Template.stepItem.helpers({
 
     durationTime: function () {
+        'use strict';
         var hours, minutes, seconds;
 
-        seconds = this.duration;
+        seconds = this.durationInSeconds;
         hours = Math.floor(seconds / 3600);
         seconds %= 3600;
         minutes = Math.floor(seconds / 60);
@@ -24,6 +25,5 @@ Template.stepItem.helpers({
             return displayTime;
         }
         return timeForDisplay(hours, minutes, seconds);
-
     }
 });
