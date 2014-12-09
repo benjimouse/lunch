@@ -11,8 +11,9 @@ Tracker.autorun(function () {
             'durationInSeconds': 1
         }
     });
+    console.log(durationSteps.count());
     durationSteps.forEach(function (step) {
-        totalSeconds += step.durationInSeconds;
+        totalSeconds += parseInt(step.durationInSeconds);
     });
     Session.set('totalCookingTime', 'Total Cooking time: ' + formatSecondsAsTime(totalSeconds));
 });
