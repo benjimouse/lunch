@@ -1,5 +1,10 @@
 Template.stepsList.helpers({
-  steps: function() {
-    return Steps.find();
-  }
+    steps: function () {
+        'use strict';
+        return Steps.find({}, {
+            sort: {
+                submitted: -1
+            }
+        });
+    }
 });

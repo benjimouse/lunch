@@ -11,7 +11,6 @@ Tracker.autorun(function () {
             'durationInSeconds': 1
         }
     });
-    console.log(durationSteps.count());
     durationSteps.forEach(function (step) {
         totalSeconds += parseInt(step.durationInSeconds);
     });
