@@ -1,3 +1,4 @@
+/*
 if (Steps.find().count() === 0) {
     Steps.insert({
         description: 'Prepare turkey',
@@ -14,3 +15,4 @@ if (Steps.find().count() === 0) {
         durationInSeconds: 9900
     });
 }
+*/

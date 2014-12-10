@@ -2,6 +2,7 @@ Template.stepItem.helpers({
 
     durationTime: function () {
         'use strict';
-        return formatSecondsAsTime(this.durationInSeconds);
+        var time = new Time().createTimeFromSeconds(this.durationInSeconds);
+        return time.timeForDisplay();
     }
 });

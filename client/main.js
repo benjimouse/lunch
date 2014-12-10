@@ -4,15 +4,14 @@ if (!Session.get('pageTitle')) {
 //TODO: review this, could (should?) use the spacebars functionality for this.
 Tracker.autorun(function () {
     'use strict';
-    var durationSteps, totalSeconds = 0;
+    var durationSteps, totalSeconds = 0,
+        time;
     document.title = Session.get('pageTitle');
     durationSteps = Steps.find({}, {
         fields: {
             'durationInSeconds': 1
         }
     });
-    durationSteps.forEach(function (step) {
-        totalSeconds += parseInt(step.durationInSeconds);
-    });
-    Session.set('totalCookingTime', 'Total Cooking time: ' + formatSecondsAsTime(totalSeconds));
+    time = new Time().createTimeFromSteps(durationSteps);
+    Session.set('totalCookingTime', 'Total Cooking time: ' + time.timeForDisplay());
 });
