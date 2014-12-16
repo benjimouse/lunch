@@ -1,15 +1,15 @@
 <template name="stepEdit">
     <form class="main form">
-        <div class="form-group">
+        <div class="form-group" {{errorClass 'durationInSeconds'}}>
             <label class="control-label" for="durationInSeconds">Duration in seconds</label>
             <div class="controls">
-                <input name="durationInSeconds" id="durationInSeconds" type="number" value="{{durationInSeconds}}" placeholder="Duration in seconds" class="form-control" />
+                <input name="durationInSeconds" id="durationInSeconds" type="number" value="{{durationInSeconds}}" placeholder="Duration in seconds" class="form-control" /><span class="help-block">{{errorMessage 'durationInSeconds'}}</span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group {{errorClass 'description'}}">
             <label class="control-label" for="description">Description</label>
             <div class="controls">
-                <input name="description" id="description" type="text" value="{{description}}" placeholder="Describe your step" class="form-control" />
+                <input name="description" id="description" type="text" value="{{description}}" placeholder="Describe your step" class="form-control" /><span class="help-block">{{errorMessage 'description'}}</span>
             </div>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary submit" />
