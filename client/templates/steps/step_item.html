@@ -3,6 +3,9 @@
         <div class="step-content">
             <h3>{{description}}</h3>
             <span>({{durationTime}})</span>
+            <p>
+                submitted by {{author}} {{#if ownStep}}<a href="{{pathFor 'stepEdit'}}">Edit</a>{{/if}}
+            </p>
         </div>
         <a href="{{pathFor 'stepPage'}}" class="discuss btn btn-default">View Details</a>
     </div>
