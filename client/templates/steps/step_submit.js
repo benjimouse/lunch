@@ -2,9 +2,14 @@ Template.stepSubmit.events({
     'submit form': function (e) {
         'use strict';
         e.preventDefault();
-
-        var step = {
-                durationInSeconds: parseInt($(e.target).find('[name=durationInSeconds]').val()),
+        var
+            seconds = parseInt($(e.target).find('[name=seconds]').val(), 10),
+            minutes = parseInt($(e.target).find('[name=minutes]').val(), 10),
+            hours = parseInt($(e.target).find('[name=hours]').val(), 10),
+            time = new Time().createTimeFromHoursMinutesSeconds(hours, minutes, seconds),
+            durationInSeconds = time.durationInSeconds,
+            step = {
+                durationInSeconds: durationInSeconds,
                 description: $(e.target).find('[name=description]').val()
             },
             errors = validateStep(step);
@@ -38,6 +43,7 @@ Template.stepSubmit.helpers({
         return Session.get('stepSubmitErrors')[field];
     },
     errorClass: function (field) {
+        'use strict';
         return !!Session.get('stepSubmitErrors')[field] ? 'has-error' : '';
     }
 });

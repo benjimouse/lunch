@@ -1,12 +1,23 @@
 <template name="stepSubmit">
     <form class="main form">
-        <div class="form-group {{errorClass 'durationInSeconds'}}">
-            <label class="control-label" for="durationInSeconds">Duration in seconds</label>
+        <fieldset class="form-group {{errorClass 'durationInSeconds'}}">
+            <label class="control-label" for="hours">Hours</label>
             <div class="controls">
-                <input name="durationInSeconds" id="durationInSeconds" type="number" value="" placeholder="Duration in seconds" class="form-control" />
-                <span class="help-block">{{errorMessage 'durationInSeconds'}}</span>
+                <input name="hours" id="hours" type="number" value="" placeholder="hours" class="form-control" />
+
             </div>
-        </div>
+            <label class="control-label" for="minutes">Minutes</label>
+            <div class="controls">
+                <input name="minutes" id="minutes" type="number" value="" placeholder="minutes" class="form-control" />
+
+            </div>
+            <label class="control-label" for="seconds">Seconds</label>
+            <div class="controls">
+                <input name="seconds" id="seconds" type="number" value="" placeholder="seconds" class="form-control" />
+
+            </div>
+            <span class="help-block">{{errorMessage 'durationInSeconds'}}</span>
+        </fieldset>
         <div class="form-group {{errorClass 'description'}}">
             <label class="control-label" for="description">Description</label>
             <div class="controls">

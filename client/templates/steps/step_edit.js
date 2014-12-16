@@ -3,7 +3,9 @@ Template.stepEdit.created = function () {
     Session.set('stepEditErrors', {});
 };
 
+
 Template.stepEdit.helpers({
+
     errorMessage: function (field) {
         'use strict';
         return Session.get('stepEditErrors')[field];
@@ -11,6 +13,21 @@ Template.stepEdit.helpers({
     errorClass: function (field) {
         'use strict';
         return !!Session.get('stepEditErrors')[field] ? 'has-error' : '';
+    },
+    seconds: function () {
+        'use strict';
+        var time = new Time().createTimeFromSeconds(this.durationInSeconds);
+        return time.seconds;
+    },
+    minutes: function () {
+        'use strict';
+        var time = new Time().createTimeFromSeconds(this.durationInSeconds);
+        return time.minutes;
+    },
+    hours: function () {
+        'use strict';
+        var time = new Time().createTimeFromSeconds(this.durationInSeconds);
+        return time.hours;
     }
 });
 
@@ -18,10 +35,15 @@ Template.stepEdit.events({
     'submit form': function (e) {
         'use strict';
         e.preventDefault();
-
-        var currentStepId = this._id,
+        var
+            seconds = parseInt($(e.target).find('[name=seconds]').val(), 10),
+            minutes = parseInt($(e.target).find('[name=minutes]').val(), 10),
+            hours = parseInt($(e.target).find('[name=hours]').val(), 10),
+            time = new Time().createTimeFromHoursMinutesSeconds(hours, minutes, seconds),
+            durationInSeconds = time.durationInSeconds,
+            currentStepId = this._id,
             stepProperties = {
-                durationInSeconds: $(e.target).find('[name=durationInSeconds]').val(),
+                durationInSeconds: durationInSeconds,
                 description: $(e.target).find('[name=description]').val()
             },
             errors = validateStep(stepProperties);
