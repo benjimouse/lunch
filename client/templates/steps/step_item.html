@@ -1,12 +1,21 @@
 <template name="stepItem">
-    <div class="step">
-        <div class="step-content">
-            <h3>{{description}}</h3>
-            <span>({{durationTime}})</span>
-            <p>
-                submitted by {{author}} {{#if ownStep}}<a href="{{pathFor 'stepEdit'}}">Edit</a>{{/if}}
-            </p>
+    <div class="col-xs-11">
+        <div class="panel panel-{{doneClass isDone}}">
+            <div class="panel-heading">
+
+                <h3 class="panel-title">{{#if isDone}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;{{/if}}{{description}}
+            <span>({{durationTime}})</span></h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    submitted by {{author}} {{#if ownStep}}<a href="{{pathFor 'stepEdit'}}">Edit</a>{{/if}}
+                </p>
+
+            </div>
+            <!-- <a href="{{pathFor 'stepPage'}}" class="discuss btn btn-default">View Details</a>-->
         </div>
-        <a href="{{pathFor 'stepPage'}}" class="discuss btn btn-default">View Details</a>
+    </div>
+    <div class="col-xs-1">
+        <button type="button" class="btn btn-{{doneClass isDone}} pull-right toggleDone">{{doneValue isDone}}</button>
     </div>
 </template>

@@ -7,7 +7,9 @@ Tracker.autorun(function () {
     var durationSteps, totalSeconds = 0,
         time;
     document.title = Session.get('pageTitle');
-    durationSteps = Steps.find({}, {
+    durationSteps = Steps.find({
+        done: false
+    }, {
         fields: {
             'durationInSeconds': 1
         }
