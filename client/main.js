@@ -16,4 +16,18 @@ Tracker.autorun(function () {
     });
     time = new Time().createTimeFromSteps(durationSteps);
     Session.set('totalCookingTime', 'Total Cooking time: ' + time.timeForDisplay());
+    var meal = Meals.findOne();
+    if (meal) {
+        var currTime = new Date().getTime();
+        var startTime = new Date(meal.serveTime.getTime() - (time.durationInSeconds*1000));
+        console.log(meal);
+        console.log(meal.serveTime.getTime()/1000);
+        var secondsToGo = Math.floor((meal.serveTime.getTime() / 1000) - time.durationInSeconds),
+        timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
+        console.log(secondsToGo);
+        console.log(timeToGo);
+        Session.set('timeToGo', timeToGo);
+        Session.set('foo', 'baa');
+    }
+
 });

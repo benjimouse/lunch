@@ -8,7 +8,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{pathFor 'stepsList'}}">{{pageTitle}} ({{totalCookingTime}})</a>
+                <a class="navbar-brand" href="{{pathFor 'stepsList'}}">{{#each meals}}{{title}} {{/each}}{{pageTitle}} ({{totalCookingTime}})</a>
+                <p>Serving - {{serveTime}}</p>
+                <p>Time to go - {{timeToGo}}</p>
             </div>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav">
