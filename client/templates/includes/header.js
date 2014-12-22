@@ -16,14 +16,18 @@ Template.header.helpers({
     },
     timeToGo: function () {
         'use strict';
-        return Session.get('timeToGo');
+        var currTime = Session.get('currentTime'),
+            startTime = Session.get('startTime'),
+            secondsToGo, timeToGo;
+        secondsToGo = Math.floor((startTime.getTime() - currTime) / 1000);
+        timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
+
+        return timeToGo;
     },
     startTime: function () {
         'use strict';
-        var meal = Meals.findOne();
-        if (meal) {
-            var startTime = new Date(meal.serveTime.getTime() - (time.durationInSeconds * 1000));
-            return new DateFormat().showFormattedDate(meal.serveTime);
+        if (Session.get('startTime')) {
+            return new DateFormat().showFormattedDate(Session.get('startTime'));
         }
     }
 });

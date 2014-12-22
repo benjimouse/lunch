@@ -36,7 +36,7 @@ if (Steps.find().count() === 0) {
         mealId: christmasLunchId,
         userId: ben._id,
         author: ben.profile.name,
-        submitted: new Date(now - 5 * 3600 * 1000),
+        submitted: new Date(now - 1 * 3600 * 1000),
         description: 'Warm oven',
         durationInSeconds: 600,
         done: false
@@ -46,7 +46,7 @@ if (Steps.find().count() === 0) {
         mealId: christmasLunchId,
         userId: ben._id,
         author: ben.profile.name,
-        submitted: new Date(now - 5 * 3600 * 1000),
+        submitted: new Date(now - 6 * 3600 * 1000),
         description: 'Turkey in oven at 200C',
         durationInSeconds: 9900,
         done: false

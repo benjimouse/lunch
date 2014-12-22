@@ -12,7 +12,26 @@ Template.stepItem.helpers({
         'use strict';
         // The !! returns false for 0, false, '', undefined etc. but true otherwise:
         // See http://stackoverflow.com/questions/784929/what-is-the-not-not-operator-in-javascript
+        // It's a way of making something a boolean.
         return !!this.done;
+    },
+    startStepAt: function () {
+        'use strict';
+        var meal = Session.get('currentMeal'),
+            startTime;
+        startTime = new Date(meal.serveTime.getTime() - (this.durationInSeconds * 1000));
+        return new DateFormat().showFormattedDate(Session.get('startTime'));
+    },
+    startStepIn: function () {
+        'use strict';
+
+        var meal = Session.get('currentMeal'),
+            currTime = Session.get('currentTime'),
+            startTime, secondsToGo, timeToGo;
+        startTime = new Date(meal.serveTime.getTime() - (this.durationInSeconds * 1000));
+        secondsToGo = Math.floor((startTime.getTime() - currTime) / 1000);
+        timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
+        return timeToGo;
     },
     doneClass: function (isDone) {
         'use strict';
