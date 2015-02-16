@@ -19,10 +19,11 @@ Template.header.helpers({
         var currTime = Session.get('currentTime'),
             startTime = Session.get('startTime'),
             secondsToGo, timeToGo;
-        secondsToGo = Math.floor((startTime.getTime() - currTime) / 1000);
-        timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
-
-        return timeToGo;
+        if (startTime) {
+            secondsToGo = Math.floor((startTime.getTime() - currTime) / 1000);
+            timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
+            return timeToGo;
+        }
     },
     startTime: function () {
         'use strict';

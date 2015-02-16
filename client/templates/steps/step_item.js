@@ -46,6 +46,32 @@ Template.stepItem.helpers({
             return 'undo';
         }
         return 'done';
+    },
+    dependsOn: function () {
+        'use strict';
+        var dependents = {},
+            deps = [];
+        if (!!this.dependsOn) {
+            dependents = Steps.find({
+                _id: this.dependsOn
+            }, {
+                sort: {
+                    submitted: -1
+                },
+
+                fields: {
+                    description: true
+                }
+
+            });
+        }
+        deps = dependents.fetch();
+        console.log(deps);
+        return deps;
+    },
+    hasDependancy: function () {
+        'use strict';
+        return !!this.dependsOn;
     }
 });
 Template.stepItem.events({
