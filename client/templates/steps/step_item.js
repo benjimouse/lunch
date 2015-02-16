@@ -49,25 +49,29 @@ Template.stepItem.helpers({
     },
     dependsOn: function () {
         'use strict';
-        var dependents = {},
-            deps = [];
+        var getSteps = {},
+            dependantSteps = [],
+            retArr = [],
+            desc;
         if (!!this.dependsOn) {
-            dependents = Steps.find({
-                _id: this.dependsOn
+            getSteps = Steps.find({
+                _id: {
+                    $in: this.dependsOn
+                }
             }, {
                 sort: {
                     submitted: -1
                 },
-
                 fields: {
                     description: true
                 }
-
             });
+            dependantSteps = getSteps.fetch();
+            dependantSteps.forEach(function (dependantStep) {
+                retArr.push(dependantStep.description);
+            });
+            return retArr.join(', ');
         }
-        deps = dependents.fetch();
-        console.log(deps);
-        return deps;
     },
     hasDependancy: function () {
         'use strict';
