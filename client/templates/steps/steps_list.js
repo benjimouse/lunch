@@ -6,7 +6,7 @@ Template.stepsList.helpers({
             mealId: mealId
         }, {
             sort: {
-                submitted: -1
+                totalDuration: -1
             }
         });
     }

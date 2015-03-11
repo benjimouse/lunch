@@ -3,6 +3,11 @@ Template.stepItem.helpers({
         'use strict';
         return this.userId === Meteor.userId();
     },
+    totalDuration: function () {
+        'use strict';
+        var time = new Time().createTimeFromSeconds(this.totalDuration);
+        return time.timeForDisplay();
+    },
     durationTime: function () {
         'use strict';
         var time = new Time().createTimeFromSeconds(this.durationInSeconds);
@@ -19,8 +24,12 @@ Template.stepItem.helpers({
         'use strict';
         var meal = Session.get('currentMeal'),
             startTime;
-        startTime = new Date(meal.serveTime.getTime() - (this.durationInSeconds * 1000));
-        return new DateFormat().showFormattedDate(Session.get('startTime'));
+        startTime = new Date(meal.serveTime.getTime() - (this.totalDuration * 1000));
+        console.log(this.totalDuration);
+        console.log(startTime);
+        console.log(this);
+        console.log(new DateFormat().showFormattedDate(startTime));
+        return new DateFormat().showFormattedDate(startTime);
     },
     startStepIn: function () {
         'use strict';
@@ -28,7 +37,7 @@ Template.stepItem.helpers({
         var meal = Session.get('currentMeal'),
             currTime = Session.get('currentTime'),
             startTime, secondsToGo, timeToGo;
-        startTime = new Date(meal.serveTime.getTime() - (this.durationInSeconds * 1000));
+        startTime = new Date(meal.serveTime.getTime() - (this.totalDuration * 1000));
         secondsToGo = Math.floor((startTime.getTime() - currTime) / 1000);
         timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
         return timeToGo;

@@ -22,13 +22,15 @@ if (Steps.find().count() === 0) {
         serveTime: new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate() + 1, 18, 30)
     });
 
-    Steps.insert({
+    prepareTurkeyId = Steps.insert({
         mealId: christmasLunchId,
         userId: ben._id,
         author: ben.profile.name,
         submitted: new Date(now - 5 * 3600 * 1000),
         description: 'Prepare turkey',
         durationInSeconds: 1800,
+        dependsOnDuration: 0,
+        totalDuration: 1800,
         done: true
     });
 
@@ -39,6 +41,9 @@ if (Steps.find().count() === 0) {
         submitted: new Date(now - 1 * 3600 * 1000),
         description: 'Warm oven',
         durationInSeconds: 600,
+        dependsOnDuration: 1800,
+        totalDuration: 2400,
+        dependsOn: [prepareTurkeyId],
         done: false
     });
 
@@ -49,6 +54,8 @@ if (Steps.find().count() === 0) {
         submitted: new Date(now - 6 * 3600 * 1000),
         description: 'Turkey in oven at 200C',
         durationInSeconds: 9900,
+        dependsOnDuration: 0,
+        totalDuration: 9900,
         done: false
     });
 }

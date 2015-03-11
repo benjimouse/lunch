@@ -2,8 +2,8 @@ Template.stepSubmit.events({
     'submit form': function (e) {
         'use strict';
         e.preventDefault();
-        console.log($(e.target).find('[name=dependsOn]').val());
         var
+            dependsOnDuration = 0,
             seconds = parseInt($(e.target).find('[name=seconds]').val(), 10),
             minutes = parseInt($(e.target).find('[name=minutes]').val(), 10),
             hours = parseInt($(e.target).find('[name=hours]').val(), 10),
@@ -13,9 +13,18 @@ Template.stepSubmit.events({
                 durationInSeconds: durationInSeconds,
                 description: $(e.target).find('[name=description]').val(),
                 mealId: Session.get('currentMeal')._id,
-                dependsOn: $(e.target).find('[name=dependsOn]').val()
+                dependsOn: $(e.target).find('[name=dependsOn]').val(),
+                dependsOnDuration: 0
             },
             errors = validateStep(step);
+        $(e.target).find('[name=dependsOn]').find(':selected').each(function (pos, option) {
+            console.log(Number(option.attributes.getNamedItem('data-duration').value));
+            return (dependsOnDuration += Number(option.attributes.getNamedItem('data-duration').value));
+        });
+        console.log(dependsOnDuration);
+        console.log('depends on duration - ' + dependsOnDuration);
+        step.dependsOnDuration = dependsOnDuration;
+        console.log(step);
         if (errors.description || errors.durationInSeconds) {
             return Session.set('stepSubmitErrors', errors);
         }
@@ -39,7 +48,7 @@ Template.stepSubmit.events({
 Template.stepSubmit.created = function () {
     'use strict';
     Session.set('stepSubmitErrors', {});
-}
+};
 
 Template.stepSubmit.helpers({
     errorMessage: function (field) {
@@ -68,6 +77,10 @@ Template.stepSubmit.helpers({
     stepId: function () {
         'use strict';
         return this._id;
+    },
+    stepDurationInSeconds: function () {
+        'use strict';
+        return this.durationInSeconds;
     }
 
 });

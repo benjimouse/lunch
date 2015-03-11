@@ -25,9 +25,9 @@
         <div class="form-group {{errorClass 'dependsOn'}}">
             <label class="control-label" for="dependsOn">Depends On:</label>
             <div class="controls">
-                <select name="dependsOn" id="dependsOn" multiple>
+                <select name="dependsOn" id="dependsOn" multiple data-select="test1111">
                     {{#each steps}}
-                    <option value="{{stepId}}">{{stepDescription}}</option>
+                    <option value="{{stepId}}" data-duration="{{stepDurationInSeconds}}" data-test="fish">{{stepDescription}}</option>
                     {{/each}}
                 </select>
                 <span class="help-block">{{errorMessage 'dependsOn'}}</span>
