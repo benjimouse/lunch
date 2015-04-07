@@ -1,9 +1,22 @@
+/*global Template */
+/*global Meteor */
+/*global Time */
+/*global Session */
+/*global console */
+/*global DateFormat */
+/*global Steps */
+/*global $ */
+/*global validateStep */
+/*global throwError */
+/*global Router */
+/*jslint nomen: true */
+
 Template.stepSubmit.events({
     'submit form': function (e) {
         'use strict';
         e.preventDefault();
         var
-            dependsOnDuration = 0,
+            doneBeforeDuration = 0,
             seconds = parseInt($(e.target).find('[name=seconds]').val(), 10),
             minutes = parseInt($(e.target).find('[name=minutes]').val(), 10),
             hours = parseInt($(e.target).find('[name=hours]').val(), 10),
@@ -13,22 +26,18 @@ Template.stepSubmit.events({
                 durationInSeconds: durationInSeconds,
                 description: $(e.target).find('[name=description]').val(),
                 mealId: Session.get('currentMeal')._id,
-                dependsOn: $(e.target).find('[name=dependsOn]').val(),
-                dependsOnDuration: 0
+                doneBefore: $(e.target).find('[name=doneBefore]').val(),
+                doneBeforeDuration: 0
             },
             errors = validateStep(step);
-        $(e.target).find('[name=dependsOn]').find(':selected').each(function (pos, option) {
-            console.log(Number(option.attributes.getNamedItem('data-duration').value));
-            return (dependsOnDuration += Number(option.attributes.getNamedItem('data-duration').value));
+        $(e.target).find('[name=doneBefore]').find(':selected').each(function (pos, option) {
+            console.log('is this it?');
+            return (doneBeforeDuration += Number(option.attributes.getNamedItem('data-duration').value));
         });
-        console.log(dependsOnDuration);
-        console.log('depends on duration - ' + dependsOnDuration);
-        step.dependsOnDuration = dependsOnDuration;
-        console.log(step);
+        step.doneBeforeDuration = doneBeforeDuration;
         if (errors.description || errors.durationInSeconds) {
             return Session.set('stepSubmitErrors', errors);
         }
-        console.log(step);
         Meteor.call('stepInsert', step, function (error, result) {
             // display the error to the user and abort
             if (error) {
@@ -84,3 +93,5 @@ Template.stepSubmit.helpers({
     }
 
 });
+
+/*jslint nomen: false */

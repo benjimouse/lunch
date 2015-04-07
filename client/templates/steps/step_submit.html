@@ -22,15 +22,15 @@
                 <span class="help-block">{{errorMessage 'description'}}</span>
             </div>
         </div>
-        <div class="form-group {{errorClass 'dependsOn'}}">
-            <label class="control-label" for="dependsOn">Depends On:</label>
+        <div class="form-group {{errorClass 'doneBefore'}}">
+            <label class="control-label" for="doneBefore">Must be done before:</label>
             <div class="controls">
-                <select name="dependsOn" id="dependsOn" multiple data-select="test1111">
+                <select name="doneBefore" id="doneBefore" multiple data-select="test1111">
                     {{#each steps}}
                     <option value="{{stepId}}" data-duration="{{stepDurationInSeconds}}" data-test="fish">{{stepDescription}}</option>
                     {{/each}}
                 </select>
-                <span class="help-block">{{errorMessage 'dependsOn'}}</span>
+                <span class="help-block">{{errorMessage 'doneBefore'}}</span>
             </div>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary" />

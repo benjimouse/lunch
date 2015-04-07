@@ -11,8 +11,8 @@
                 <p>
                     submitted by {{author}} {{#if ownStep}}<a href="{{pathFor 'stepEdit'}}">Edit</a>{{/if}}
                 </p>
-                {{#if hasDependancy}}
-                <p>Depends on: {{dependsOn}}</p>{{/if}}
+                {{#if hasDoneBefore}}
+                <p>Needs to be done before: {{doneBefore}}</p>{{/if}}
             </div>
             <!-- <a href="{{pathFor 'stepPage'}}" class="discuss btn btn-default">View Details</a>-->
         </div>

@@ -1,3 +1,12 @@
+/*global Template */
+/*global Meteor */
+/*global Time */
+/*global Session */
+/*global console */
+/*global DateFormat */
+/*global Steps */
+/*jslint nomen: true */
+
 Template.stepItem.helpers({
     ownStep: function () {
         'use strict';
@@ -25,10 +34,6 @@ Template.stepItem.helpers({
         var meal = Session.get('currentMeal'),
             startTime;
         startTime = new Date(meal.serveTime.getTime() - (this.totalDuration * 1000));
-        console.log(this.totalDuration);
-        console.log(startTime);
-        console.log(this);
-        console.log(new DateFormat().showFormattedDate(startTime));
         return new DateFormat().showFormattedDate(startTime);
     },
     startStepIn: function () {
@@ -36,7 +41,9 @@ Template.stepItem.helpers({
 
         var meal = Session.get('currentMeal'),
             currTime = Session.get('currentTime'),
-            startTime, secondsToGo, timeToGo;
+            startTime,
+            secondsToGo,
+            timeToGo;
         startTime = new Date(meal.serveTime.getTime() - (this.totalDuration * 1000));
         secondsToGo = Math.floor((startTime.getTime() - currTime) / 1000);
         timeToGo = new Time().createTimeFromSeconds(secondsToGo).timeForDisplay();
@@ -56,16 +63,16 @@ Template.stepItem.helpers({
         }
         return 'done';
     },
-    dependsOn: function () {
+    doneBefore: function () {
         'use strict';
         var getSteps = {},
             dependantSteps = [],
             retArr = [],
             desc;
-        if (!!this.dependsOn) {
+        if (!!this.doneBefore) {
             getSteps = Steps.find({
                 _id: {
-                    $in: this.dependsOn
+                    $in: this.doneBefore
                 }
             }, {
                 sort: {
@@ -82,9 +89,9 @@ Template.stepItem.helpers({
             return retArr.join(', ');
         }
     },
-    hasDependancy: function () {
+    hasDoneBefore: function () {
         'use strict';
-        return !!this.dependsOn;
+        return !!this.doneBefore;
     }
 });
 Template.stepItem.events({
@@ -94,3 +101,4 @@ Template.stepItem.events({
         Meteor.call('toggleDone', this._id);
     }
 });
+/*jslint nomen: false */
