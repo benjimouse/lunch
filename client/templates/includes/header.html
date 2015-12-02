@@ -10,7 +10,8 @@
                 </button>
                 <a class="navbar-brand" href="{{pathFor 'stepsList'}}">{{#each meals}}{{title}} {{/each}}{{pageTitle}} ({{totalCookingTime}})</a>
                 <div id="">Serving - {{#if editingServingTime}}
-                    <input type="datetime-local" name="servingDate" id="servingDate" value="{{servingTime}}" class="form-control" />{{else}}<a href="#" id="servingTime">{{serveTime}}</a>{{/if}}
+                    <input type="datetime-local" name="servingDate" id="servingDate" value="{{servingTime}}" class="form-control" />{{else}}
+                    <div><a href="#" id="servingTime">{{serveTime}}</a></div>{{/if}}
                 </div>
 
                 <div>Start cooking at - {{startTime}}</div>
