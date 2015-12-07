@@ -1,7 +1,11 @@
 Template.header.helpers({
     pageTitle: function () {
         'use strict';
-        return Session.get('pageTitle');
+        if (!!Session.get('currentMeal')) {
+            return Session.get('currentMeal').title;
+        } else {
+            return Session.get('pageTitle');
+        }
     },
     totalCookingTime: function () {
         'use strict';
@@ -9,14 +13,16 @@ Template.header.helpers({
     },
     servingTime: function () {
         'use strict';
-        var meal = Meals.findOne();
+
+        var meal = Session.get('currentMeal');
         if (meal) {
             return new DateFormat().showDateTimeForEditing(meal.serveTime);
         }
     },
     serveTime: function () {
         'use strict';
-        var meal = Meals.findOne();
+
+        var meal = Session.get('currentMeal');
         if (meal) {
             return new DateFormat().showFormattedDate(meal.serveTime);
         }
@@ -48,8 +54,28 @@ Template.header.events({
     'click #servingTime': function (e) {
         'use strict';
         e.preventDefault();
-        console.log(this);
         Session.set('editingServingTime', true);
-        //TODO: Finish
+
+    },
+    'click #updateServingDate': function (e) {
+        'use strict';
+        e.preventDefault();
+        var currentMeal = Session.get('currentMeal'),
+            mealTime = new Date($('#servingDate').val());
+
+        Session.set('editingServingTime', false);
+
+        Meals.update(currentMeal._id, {
+            $set: {
+                serveTime: mealTime
+            }
+        }, function (error) {
+            if (error) {
+                // display the error to the user
+                throwError(error.reason);
+            } else {
+
+            }
+        });
     }
 });

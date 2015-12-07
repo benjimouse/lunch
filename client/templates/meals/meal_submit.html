@@ -1,0 +1,26 @@
+<template name="mealSubmit">
+    <form class="main form">
+        <fieldset class="form-group {{errorClass 'title'}}">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+                <input name="title" id="title" type="text" value="" placeholder="title" class="form-control" />
+            </div>
+            <span class="help-block">{{errorMessage 'title'}}</span>
+        </fieldset>
+        <div class="form-group {{errorClass 'description'}}">
+            <label class="control-label" for="description">Description</label>
+            <div class="controls">
+                <input name="description" id="description" type="text" value="" placeholder="Describe your meal" class="form-control" />
+                <span class="help-block">{{errorMessage 'description'}}</span>
+            </div>
+        </div>
+        <div class="form-group {{errorClass 'serveTime'}}">
+            <label class="control-label" for="serveTime">Serving at:</label>
+            <div class="controls">
+                <input name="serveTime" id="serveTime" type="dateTime-local" value="" class="form-control" />
+            </div>
+            <span class="help-block">{{errorMessage 'serveTime'}}</span>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+</template>

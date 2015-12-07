@@ -7,21 +7,23 @@ Tracker.autorun(function () {
     var durationSteps, totalSeconds = 0,
         time, meal, currTime, startTime;
     document.title = Session.get('pageTitle');
-    durationSteps = Steps.find({
-        done: false
-    }, {
-        fields: {
-            'durationInSeconds': 1
-        }
-    });
-    time = new Time().createTimeFromSteps(durationSteps);
-    Session.set('totalCookingTime', 'Total Cooking time: ' + time.timeForDisplay());
     meal = Meals.findOne();
+
     if (meal) {
-        currTime = Session.get('currentTime');
+        durationSteps = Steps.find({
+            done: false,
+            mealId: meal._id
+        }, {
+            fields: {
+                'durationInSeconds': 1
+            }
+        });
+        time = new Time().createTimeFromSteps(durationSteps);
+        Session.set('totalCookingTime', 'Total Cooking time: ' + time.timeForDisplay());
         startTime = new Date(meal.serveTime.getTime() - (time.durationInSeconds * 1000));
         Session.set('startTime', startTime);
         Session.set('currentMeal', meal);
+
     }
 });
 // Gets the current time once a second

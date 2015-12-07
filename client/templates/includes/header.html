@@ -9,9 +9,13 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{pathFor 'stepsList'}}">{{#each meals}}{{title}} {{/each}}{{pageTitle}} ({{totalCookingTime}})</a>
-                <div id="">Serving - {{#if editingServingTime}}
-                    <input type="datetime-local" name="servingDate" id="servingDate" value="{{servingTime}}" class="form-control" />{{else}}
-                    <div><a href="#" id="servingTime">{{serveTime}}</a></div>{{/if}}
+                <div id="">{{#if editingServingTime}}
+                    <form class="form-inline">
+                        <label for="servingDate">Serving at: </label>
+                        <input type="datetime-local" name="servingDate" id="servingDate" value="{{servingTime}}" class="form-control" />
+                        <button id="updateServingDate" type="button" class="btn btn-default btn-sm">update</button>
+                    </form>{{else}}
+                    <div>Serving at: <a href="#" id="servingTime">{{serveTime}}</a></div>{{/if}}
                 </div>
 
                 <div>Start cooking at - {{startTime}}</div>
@@ -21,7 +25,10 @@
                 <ul class="nav navbar-nav">
                     {{#if currentUser}}
                     <li><a href="{{pathFor 'stepSubmit'}}">Submit new step</a>
-                    </li>{{/if}}
+                    </li>
+                    <li><a href="{{pathFor 'mealSubmit'}}">Create new meal</a>
+                    </li>
+                    {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {{> loginButtons}}

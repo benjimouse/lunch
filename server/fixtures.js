@@ -21,7 +21,7 @@ if (Steps.find().count() === 0) {
         submitted: new Date(now - 7 * 3600 * 1000),
         serveTime: new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate() + 1, 18, 30)
     });
-
+Session.set('defaultMealId',christmasLunchId);
     prepareTurkeyId = Steps.insert({
         mealId: christmasLunchId,
         userId: ben._id,
