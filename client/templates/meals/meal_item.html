@@ -1,0 +1,23 @@
+<template name="mealItem">
+    <div class="col-xs-11">
+        <div class="panel">
+            <div class="panel-heading">
+                <h2>{{title}} ({{servingTime}})</h2>
+                <div>{{description}}</div>
+                {{#if stepCount}}
+                <div>Total cooking time: - {{totalCookingTime}}</div>
+                <div>Start cooking at: {{mealStartAt}}</div>
+                {{/if}}
+            </div>
+            <div class="panel-body">
+                <p>
+                    submitted by {{author}} <a href="{{pathFor 'mealEdit'}}">Edit</a>
+                </p>
+            </div>
+            <a href="{{pathFor 'mealPage'}}" class="btn btn-default">Start meal</a>
+        </div>
+    </div>
+    <div class="col-xs-1">
+        <button type="button" class="btn btn-danger pull-right toggleDone">Delete</button>
+    </div>
+</template>

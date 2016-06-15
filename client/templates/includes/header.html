@@ -4,11 +4,11 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar">Meals</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{pathFor 'stepsList'}}">{{#each meals}}{{title}} {{/each}}{{pageTitle}} ({{totalCookingTime}})</a>
+                <a class="navbar-brand" href="{{pathFor 'stepsList'}}">{{pageTitle}} ({{totalCookingTime}})</a>
                 <div id="">{{#if editingServingTime}}
                     <form class="form-inline">
                         <label for="servingDate">Serving at: </label>
