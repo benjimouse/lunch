@@ -15,6 +15,8 @@ Template.mealsList.helpers({
                     serveTime: -1
                 }
             });
+        // Clear the current meal
+        Session.set('currentMeal', '');
         return allMeals;
     }
 });

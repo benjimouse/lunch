@@ -1,4 +1,12 @@
 Template.header.helpers({
+    currentMeal: function () {
+        'use strict';
+        return Session.get('currentMeal');
+    },
+    hasCurrentMeal: function () {
+        'use strict';
+        return !!Session.get('currentMeal');
+    },
     pageTitle: function () {
         'use strict';
         if (!!Session.get('currentMeal')) {
