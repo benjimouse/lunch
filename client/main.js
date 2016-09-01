@@ -1,13 +1,14 @@
+/*
 if (!Session.get('pageTitle')) {
     Session.set('pageTitle', 'Lunch');
 }
-
+*/
 Tracker.autorun(function () {
     'use strict';
     var durationSteps, totalSeconds = 0,
         time, meal, currTime, startTime;
 
-    meal = Meals.findOne();
+    meal = Session.get('currentMeal');
     console.log(meal);
 
     if (meal) {

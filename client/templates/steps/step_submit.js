@@ -15,6 +15,7 @@ Template.stepSubmit.events({
     'submit form': function (e) {
         'use strict';
         e.preventDefault();
+        console.log('huh');
         var
             doneBeforeDuration = 0,
             seconds = parseInt($(e.target).find('[name=seconds]').val(), 10),
