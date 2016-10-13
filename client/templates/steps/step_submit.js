@@ -31,10 +31,13 @@ Template.stepSubmit.events({
                 doneBeforeDuration: 0
             },
             errors = validateStep(step);
-        $(e.target).find('[name=doneBefore]').find(':selected').each(function (pos, option) {
-            console.log('is this it?');
-            return (doneBeforeDuration += Number(option.attributes.getNamedItem('data-duration').value));
-        });
+        console.log('after validation');
+        if (!!$(e.target).find('[name=doneBefore]').val()) {
+            $(e.target).find('[name=doneBefore]').find(':selected').each(function (pos, option) {
+                console.log('is this it?');
+                return (doneBeforeDuration += Number(option.attributes.getNamedItem('data-duration').value));
+            });
+        }
         step.doneBeforeDuration = doneBeforeDuration;
         if (errors.description || errors.durationInSeconds) {
             return Session.set('stepSubmitErrors', errors);

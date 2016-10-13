@@ -88,6 +88,7 @@ Template.stepItem.helpers({
             });
             return retArr.join(', ');
         }
+        return retArr;
     },
     hasDoneBefore: function () {
         'use strict';
