@@ -24,9 +24,6 @@ Template.stepItem.helpers({
     },
     isDone: function () {
         'use strict';
-        // The !! returns false for 0, false, '', undefined etc. but true otherwise:
-        // See http://stackoverflow.com/questions/784929/what-is-the-not-not-operator-in-javascript
-        // It's a way of making something a boolean.
         return !!this.done;
     },
     startStepAt: function () {
